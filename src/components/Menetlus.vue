@@ -143,7 +143,7 @@ export default {
             {
               institution: "RK",
               title: "Hindamisaruanded",
-              description: "Hinnatakse direktiivi mõju aja jooksul.",
+              description: "Hinnatakse direktiivi mõju teatud aja jooksul.",
             },
             {
               institution: "RK",
