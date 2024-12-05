@@ -1,14 +1,16 @@
 {
   "name": "el-menetlus",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "https://KristiinaKr.github.io/EL-asjade-menetlus",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "deploy": "gh-pages -d dist",
     "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "gh-pages": "^6.2.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
