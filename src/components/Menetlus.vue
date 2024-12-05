@@ -5,10 +5,11 @@
         v-for="(block, index) in timeline"
         :key="index"
         @click="toggleDetails(index)"
-        :class="{ active: block.active }"
+        :class="{ active: block.active, 'first-block': block.firstBlock }"
     >
       <!-- Main Step Box -->
       <div class="main-box">
+
         <h3>{{ block.title }}</h3>
       </div>
       <!-- Expanded Details -->
@@ -26,7 +27,7 @@
             <p>{{ step.description }}</p>
 
             <!-- Example of a link to jump 5 steps back -->
-            <button v-if="stepIndex === 2" @click="navigateToStep(index - 5)">Go Back 5 Steps</button>
+           <!-- <button v-if="stepIndex === 2" @click="navigateToStep(index - 5)">Tekst</button> -->
 
           </div>
         </div>
@@ -42,50 +43,75 @@ export default {
     return {
       timeline: [
         {
+          title: "Eelfaas: avalikud konsultatsioonid, proaktiivsed seisukohad, valged paberid",
+          firstBlock: true,
+        },
+
+        {
           title: "Euroopa Komisjon esitab algatuse",
           details: [
             {
-              institution: "KOK",
-              title: "Algatuse ettevalmistamine",
-              description: "Komisjon valmistab ette seaduseelnõu.",
+              institution: "ELS",
+              title: "Uute EL algatuste seire",
+              description: "Uuendab iganädalaset algatuste tabelit. Kooskõlastab ministeeriumitega, kas seisukohad esitatakse KOKile ja/või VV istungile.",
             },
             {
-              institution: "Ministeerium",
-              title: "Avalik konsultatsioon",
-              description: "Kaasatakse huvirühmad ja avalikkus.",
+              institution: "KOK",
+              title: "Vastutajate ja tähtaegade määramine",
+              description: "Määrab kindlaks algatuse vastutaja ja kaasvastutaja(d) ning KOKi/VVsse esitamise tähtaja.",
             },
             {
               institution: "ELS",
-              title: "Mõjuhinnang",
+              title: "Resolutsiooni koostamine",
               description:
-                  "Hinnatakse ettepaneku mõju majandusele, keskkonnale ja ühiskonnale.",
+                  "ELS saadab pea- ja kaasvastutajatele resolutsiooni EL algatuse osas seisukohtade koostamiseks.s",
             },
           ],
           active: false,
         },
         {
-          title: "Seisukohtade kaitsmine eri tasanditel",
+          title: "Eesti seisukohtade kujundamine",
           details: [
             {
-              institution: "ELS",
-              title: "Esimene lugemine",
-              description: "Seaduseelnõu arutatakse esimest korda.",
+              institution: "Ministeerium",
+              title: "Seisukohtade koostamine ja taustadokumentide ettevalmistamine.",
+              description: "Ministeeriumi eksperdid analüüsivad algatust ja selle valguses Eesti huvisid. Kaasamisring huvirühmade sisendi saamiseks. Materjalide (sh seletuskirja) koostamine",
             },
             {
-              institution: "ELS",
-              title: "Teine lugemine",
-              description: "Muudetud eelnõu arutatakse uuesti.",
+              institution: "KOK",
+              title: "Seisukohtade kooskõlastamine",
+              description: "Kõik KOKi osapooled kooskõlastavad ja vajadusel täiendavad. Tehakse lõplik otsus seisukohtade VVle esitamiseks.",
             },
             {
-              institution: "ELS",
-              title: "Vahenduskomitee",
-              description: "Erimeelsuste korral moodustatakse vahenduskomitee.",
+              institution: "Valitsus",
+              title: "Seisukohtade heaks kiitmine",
+              description: "Vabariigi Valitsus kiidab heaks esitatud seisukohad.",
+            },
+            {
+              institution: "ELS / ministeerium",
+              title: "Seisukohtade edastamine",
+              description: "Valitsuse seisukohad saadetakse Riigikogule mandaadi andmiseks ning teadmiseks kaasatud huvigruppidele.",
+            },
+            {
+              institution: "Riigikogu juhatus",
+              title: "Määrab vastutavad komisjonid ja menetlustähtaja",
+              description: "Juhatuse otsusega saadetakse VV seisukohad valdkondlikule komisjonile arvamuse andmiseks. Tavapärane tähtaeg 2 töönädalat.",
+            },
+            {
+              institution: "Riigikogu valdkondlik komisjon",
+              title: "Arvamuse andmine",
+              description: "Valdkondlik komisjon (või mitu) arutab  VV seisukohti ning annab arvamuse EL asjade komisjonile.",
+            },
+            {
+              institution: "Riigikogu EL asjade komisjon",
+              title: "Kinnitab Eesti seisukohad",
+              description: "ELAK arutab seisukohti ning kooskõlas valdkondlike komisjonide arvamusega kinnitab Eesti seisukohad.",
             },
           ],
           active: false,
         },
         {
-          title: "Rakendamine liikmesriikides",
+          title: "EL tasandil seisukohtade kaitsmine",
           details: [
             {
               institution: "RK",
@@ -107,7 +133,7 @@ export default {
           active: false,
         },
         {
-          title: "Järelevalve ja hindamine",
+          title: "Rakendamine ja järelvalve",
           details: [
             {
               institution: "RK",
@@ -150,11 +176,11 @@ export default {
 
 <style scoped>
 /* Import Roboto font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /* Apply Roboto font to the body and component elements */
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Thin', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -169,9 +195,12 @@ body {
 
 .timeline-block {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   width: 80%;
   cursor: pointer;
+}
+.timeline-block:first-child {
+  margin-bottom: 10px; /* Adjust margin for the first block */
 }
 
 .main-box {
@@ -181,14 +210,25 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-family: 'Roboto Thin', sans-serif;
+  font-weight: 100;
   font-size: 1.2em;
 }
 
 .main-box:hover {
   transform: scale(1.02);
 }
+
+   /* Styling for the first timeline block */
+ .first-block .main-box {
+   background-color: #fff9c4; /* Light yellow background */
+   border: 2px solid #fbc02d;  /* Soft yellow border */
+   color: #000000;             /* Black text color */
+   font-size: 0.9em;           /* Smaller font size */
+   font-weight: normal;        /* Normal font weight */
+   padding: 10px 20px;         /* Reduced padding for a smaller height */
+   margin: 10px 0;             /* Margin for some spacing */
+ }
 
 .details {
   margin-top: 20px;
@@ -211,7 +251,7 @@ body {
 }
 
 .sub-box-left {
-  width: 15%;
+  width: 18%;
   text-align: center;
   font-weight: 500;
   color: #007BFF;
@@ -220,7 +260,7 @@ body {
 }
 
 .sub-box-right {
-  width: 85%;
+  width: 82%;
   padding-left: 10px;
   text-align: left;
   font-family: 'Roboto', sans-serif;

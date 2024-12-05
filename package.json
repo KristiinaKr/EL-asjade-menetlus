@@ -1,10 +1,10 @@
 {
   "name": "el-menetlus",
   "version": "0.1.0",
-  "homepage": "https://Kristiinakr.github.io/EL-asjade-menetlus",
+  "homepage": "https://kristiinakr.github.io/EL-asjade-menetlus",
   "scripts": {
-    "deploy": "gh-pages -d dist",
     "build": "vue-cli-service build",
+    "deploy": "gh-pages -d dist",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint"
   },
@@ -20,6 +20,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "gh-pages": "^6.2.0",
+    "serve": "^14.2.4",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
