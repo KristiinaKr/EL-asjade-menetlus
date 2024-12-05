@@ -111,7 +111,7 @@ export default {
           active: false,
         },
         {
-          title: "EL tasandil seisukohtade kaitsmine",
+          title: "EL tasandil Eesti seisukohtade kaitsmine",
           details: [
             {
               institution: "RK",
