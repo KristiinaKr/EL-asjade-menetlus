@@ -1,4 +1,9 @@
 <template>
+  <!-- <div class="app-container">
+    Top Center Title
+    <header class="app-header">
+      <h1>EL asjade menetlus</h1>
+    </header> -->
   <div class="timeline">
     <div
         class="timeline-block"
@@ -14,17 +19,19 @@
       </div>
       <!-- Expanded Details -->
       <div class="details">
-        <div
-            class="sub-box"
+        <div class="sub-box"
             v-for="(step, stepIndex) in block.details"
             :key="stepIndex"
         >
           <div class="sub-box-left">
-            <span>{{ step.institution }}</span>
+            <span :style="{ color: institutionColors[step.institution] || '#000' }">
+               {{ step.institution }}
+            </span>
           </div>
+
           <div class="sub-box-right">
             <h4>{{ step.title }}</h4>
-            <p>{{ step.description }}</p>
+            <p v-html="step.description"></p>
 
             <!-- Example of a link to jump 5 steps back -->
            <!-- <button v-if="stepIndex === 2" @click="navigateToStep(index - 5)">Tekst</button> -->
@@ -53,18 +60,18 @@ export default {
             {
               institution: "ELS",
               title: "Uute EL algatuste seire",
-              description: "Uuendab iganädalaset algatuste tabelit. Kooskõlastab ministeeriumitega, kas seisukohad esitatakse KOKile ja/või VV istungile.",
+              description: "Uuendab iganädalaset algatuste tabelit. Kooskõlastab ministeeriumitega, kas Eesti seisukohad esitatakse KOK-ile ja valitsuse istungile.",
             },
             {
               institution: "KOK",
               title: "Vastutajate ja tähtaegade määramine",
-              description: "Määrab kindlaks algatuse vastutaja ja kaasvastutaja(d) ning KOKi/VVsse esitamise tähtaja.",
+              description: "Määrab kindlaks algatuse vastutava ministeeriumi ja kaasvastutaja(d) ning KOK-i/VV-sse esitamise vajaduse.",
             },
             {
               institution: "ELS",
               title: "Resolutsiooni koostamine",
               description:
-                  "ELS saadab pea- ja kaasvastutajatele resolutsiooni EL algatuse osas seisukohtade koostamiseks.s",
+                  "ELS saadab pea- ja kaasvastutajatele resolutsiooni EL algatuse osas seisukohtade koostamiseks. Määrab tähtajad (tavapäraselt 6 nädalat VV-sse jõudmiseks  subsidiaarsuskontrolli tähtaja sees).",
             },
           ],
           active: false,
@@ -74,38 +81,39 @@ export default {
           details: [
             {
               institution: "Ministeerium",
-              title: "Seisukohtade koostamine ja taustadokumentide ettevalmistamine.",
-              description: "Ministeeriumi eksperdid analüüsivad algatust ja selle valguses Eesti huvisid. Kaasamisring huvirühmade sisendi saamiseks. Materjalide (sh seletuskirja) koostamine",
+              title: "Seisukohtade koostamine ja taustadokumentide ettevalmistamine",
+              description: "Ministeeriumi eksperdid analüüsivad algatust ja selle valguses Eesti huvisid. Kaasatakse huvigrupid sisendi saamiseks. Koostatakse materjalid (seisukohad, seletuskiri)."
             },
             {
               institution: "KOK",
               title: "Seisukohtade kooskõlastamine",
-              description: "Kõik KOKi osapooled kooskõlastavad ja vajadusel täiendavad. Tehakse lõplik otsus seisukohtade VVle esitamiseks.",
+              description: "Kõik KOK-i osapooled kooskõlastavad ja vajadusel täiendavad. Tehakse lõplik otsus seisukohtade VV-le esitamiseks.",
             },
             {
               institution: "Valitsus",
               title: "Seisukohtade heaks kiitmine",
-              description: "Vabariigi Valitsus kiidab heaks esitatud seisukohad.",
-            },
-            {
-              institution: "ELS / ministeerium",
-              title: "Seisukohtade edastamine",
-              description: "Valitsuse seisukohad saadetakse Riigikogule mandaadi andmiseks ning teadmiseks kaasatud huvigruppidele.",
+              description: "Vabariigi Valitsus kiidab heaks esitatud seisukohad. Saadab Riigikogule.",
             },
             {
               institution: "Riigikogu juhatus",
-              title: "Määrab vastutavad komisjonid ja menetlustähtaja",
-              description: "Juhatuse otsusega saadetakse VV seisukohad valdkondlikule komisjonile arvamuse andmiseks. Tavapärane tähtaeg 2 töönädalat.",
+              title: "Vastutavate komisjonide ja menetlustähtaja määramine",
+              description: "Juhatus määrab Riigikogu valdkondliku komisjoni (või mitu) ELAK-ile arvamust andma. Tavapärane tähtaeg 2 töönädalat.",
             },
             {
               institution: "Riigikogu valdkondlik komisjon",
               title: "Arvamuse andmine",
-              description: "Valdkondlik komisjon (või mitu) arutab  VV seisukohti ning annab arvamuse EL asjade komisjonile.",
+              description: "Valdkondlik komisjon (või mitu) arutab  valitsuse esitatud seisukohti ning annab arvamuse EL asjade komisjonile.",
             },
             {
               institution: "Riigikogu EL asjade komisjon",
-              title: "Kinnitab Eesti seisukohad",
-              description: "ELAK arutab seisukohti ning kooskõlas valdkondlike komisjonide arvamusega kinnitab Eesti seisukohad.",
+              title: "Lõplike Eesti seisukohtade kinnitamine",
+              description: "ELAK arutab seisukohti võttes arvesse valdkondlike komisjonide arvamust, tehes vajadusel muudatusi ja/või täiendusi, ning kinnitab lõplikud Eesti seisukohad. <br> <span style='color: gray'> Vajadusel analüüsib ELAK subsidiaarsusprintsiibile vastavust. </span>",
+            },
+            {
+            institution: "(Erandkorras)",
+        title: "",
+        description: "<span style='color: darkgray;'>Juhul kui ELAKi kinnitatud seisukoht erineb <strong>märkimisväärselt</strong> VV seisukohast, esitab ministeerium seisukohad uuesti VV-le. " +
+            "RKKTS § 152 prim 4 lõige 3 alusel on Valitsus kohustatud Riigikogu seisukohast kinni pidama.</span>",
             },
           ],
           active: false,
@@ -113,53 +121,82 @@ export default {
         {
           title: "EL tasandil seisukohtade kaitsmine",
           details: [
+          {
+            institution: "Ministeerium",
+            title: "Seisukohtade esitamine ja töörühmades kaitsmine",
+            description: "Ministeerium edastab Eesti seisukohad Euroopa Komisjonile ning esindab neid töörühmades. Vajadusel algatatakse seisukohtade täiendamine ministrite nõukogu materjalide raames."
+          },
+          {
+            institution: "AEEL",
+            title: "Seisukohtade ettevalmistamine Coreperi kohtumisteks",
+            description: "Eesti alaline esindus (AEEL) edastab ministeeriumitele sisendipalve Coreperi läbirääkimiste juhisteks. Coreperis esindab Eesti seisukohti suursaadik."
+          },
+          {
+            institution: "Ministeerium",
+            title: "Ministrite nõukogu materjalide koostamine",
+            description: "Erinevate EL ministrite nõukogu koosseisude kohtumisteks koostatakse materjal. Hinnatakse, kas vajalik on VV mandaat (näiteks kui pole olemasolevat mandaati või materjali raames täiendatakse mõne EL algatuse kohta Eesti seisukohti)."
+          },
             {
-              institution: "RK",
-              title: "Direktiivi ülevõtmine",
-              description: "Liikmesriigid kohandavad seadusi direktiivi järgi.",
+              institution: "KOK/Valitsus",
+              title: "Nõukogu materjali esmane heakskiit",
+              description: "Kõik KOK-i osapooled kooskõlastavad ja vajadusel täiendavad materjali. Kui vaja, saadetakse materjal valitsusele heaks kiitmiseks.",
             },
-            {
-              institution: "RK",
-              title: "Rakendusaktide vastuvõtmine",
-              description:
-                  "Praktilised rakendusmeetmed määratakse kindlaks.",
-            },
-            {
-              institution: "RK",
-              title: "Järelevalve",
-              description: "Jälgitakse direktiivi rakendamist.",
-            },
-          ],
+          {
+            institution: "Riigikogu EL asjade komisjon",
+            title: "Nõukogu materjalile lõpliku mandaadi andmine",
+            description: "Nõukogu seisukohad saadetakse otse ELAK-ile. Minister tutvustab ELAKile Eesti põhisõnumeid, komisjon arutab ja annab mandaadi, vajadusel materjale täiendades."
+          },
+          {
+            institution: "Ministeerium",
+            title: "Eesti seisukohtade kaitsmine ja kohtumiste ülevaadete koostamine",
+            description: "Minister esindab Eesti kinnitatud seisukohti EL nõukogus. Koostab ka aruteludest ülevaated, mis edastatakse Riigikogule ja valitsusele. <br> Kui minister ei ole ELAKi mandaadist kinni pidanud, peab ta RKKTS alusel selles esimesel võimalusel aru andma."
+          }
+        ],
           active: false,
         },
         {
-          title: "Rakendamine ja järelvalve",
+          title: "EL õigusakti ülevõtmine ja järelvalve",
           details: [
             {
-              institution: "RK",
-              title: "Aruandlus",
-              description: "Koostatakse rakendamise aruanded.",
+              institution: "Euroopa Parlament ja nõukogu",
+              title: "Seadusakti vastuvõtmine",
+              description: "Seadusakti lõpptekst võetakse vastu ning tõlgitakse kõikidesse EL ametlikesse keeltesse.",
             },
             {
-              institution: "RK",
-              title: "Hindamisaruanded",
-              description: "Hinnatakse direktiivi mõju teatud aja jooksul.",
+              institution: "ELS / ministeerium",
+              title: "Siseriiklik rakendamine või ülevõtmine",
+              description: "Tagab EL õigusaktide õigeaegse ülevõtmise, planeerib vajalikke tegevusi.",
             },
             {
-              institution: "RK",
-              title: "Parandusmeetmed",
-              description: "Probleemide korral võetakse meetmeid.",
+              institution: "Riigikogu",
+              title: "Direktiivi ülevõtmine",
+              description: "Kavandab direktiiviga sätestatud õigused ja kohustused riigisisesesse õigusesse (seadus või määrus).",
             },
           ],
           active: false,
         },
       ],
+      institutionColors: {
+        ELS: '#EF6c00',  // orange
+        KOK: '#00a86b',  // Green
+        Ministeerium: '#8E44AD', // Purple
+        Valitsus: '#028A0f', //
+        "KOK/Valitsus": '#00a86b',
+        Riigikogu: '#29b6f6',
+        AEEL: '#de3161',
+        "Euroopa Parlament ja nõukogu": '#de3161',
+        "Riigikogu juhatus": '#29b6f6',
+        "Riigikogu valdkondlik komisjon": '#039be5', //
+        "Riigikogu EL asjade komisjon": '#01579b', //
+        "ELS / ministeerium": '#EF6c00',
+        "(Erandkorras)": '#a9a9a9',
+      },
     };
   },
   methods: {
     toggleDetails(index) {
       this.timeline[index].active = !this.timeline[index].active;
-      },
+    },
     navigateToStep(stepIndex) {
       // Ensure the stepIndex is within bounds
       if (stepIndex >= 0 && stepIndex < this.timeline.length) {
@@ -195,8 +232,8 @@ body {
 
 .timeline-block {
   text-align: center;
-  margin-bottom: 20px;
-  width: 80%;
+  margin-bottom: 10px;
+  width: 90%;
   cursor: pointer;
 }
 .timeline-block:first-child {
@@ -206,7 +243,7 @@ body {
 .main-box {
   background-color: #e3f2fd; /* Light blue */
   padding: 15px;
-  border: 2px solid #90caf9; /* Border blue */
+  border: 1px solid #b1f2ff; /* Border blue */
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -219,16 +256,16 @@ body {
   transform: scale(1.02);
 }
 
-   /* Styling for the first timeline block */
- .first-block .main-box {
-   background-color: #fff9c4; /* Light yellow background */
-   border: 2px solid #fbc02d;  /* Soft yellow border */
-   color: #000000;             /* Black text color */
-   font-size: 0.9em;           /* Smaller font size */
-   font-weight: normal;        /* Normal font weight */
-   padding: 10px 20px;         /* Reduced padding for a smaller height */
-   margin: 10px 0;             /* Margin for some spacing */
- }
+/* Styling for the first timeline block */
+.first-block .main-box {
+  background-color: #ffffe0; /* Light yellow background */
+  border: 1px solid #ffff99;  /* Soft yellow border */
+  color: #000000;             /* Black text color */
+  font-size: 0.9em;           /* Smaller font size */
+  font-weight: normal;        /* Normal font weight */
+  padding: 10px 20px;         /* Reduced padding for a smaller height */
+  margin: 10px 0;             /* Margin for some spacing */
+}
 
 .details {
   margin-top: 20px;
@@ -251,7 +288,7 @@ body {
 }
 
 .sub-box-left {
-  width: 18%;
+  width: 20%;
   text-align: center;
   font-weight: 500;
   color: #007BFF;
@@ -260,7 +297,7 @@ body {
 }
 
 .sub-box-right {
-  width: 82%;
+  width: 80%;
   padding-left: 10px;
   text-align: left;
   font-family: 'Roboto', sans-serif;
