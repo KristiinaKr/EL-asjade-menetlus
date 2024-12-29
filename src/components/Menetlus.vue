@@ -279,7 +279,7 @@ body {
 .sub-box {
   display: flex;
   align-items: center;
-  background-color: #de3161; /* Light gray */
+  background-color: #028A0f; /* Light gray */
   padding: 15px;
   margin: 10px 0;
   border: 1px solid #ddd;
